@@ -9,7 +9,7 @@ def openTab(searchTerms):
   #TODO: check when the subprocess is killed then open new tab.
   poll = p.poll()
 
-def checkPStatus():
+def checkPStatus(): #if returns None thennnnn its running <3
   if poll != None:
     #open new tab thanks
     openTab("soundcloud.com/search?q=stairway%20to%20heaven")
