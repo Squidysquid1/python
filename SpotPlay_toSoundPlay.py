@@ -15,3 +15,7 @@ def checkPStatus(): #if returns None thennnnn its running <3
   if poll != None:
     #open new tab thanks next in array pls
     openTab("www.soundcloud.com/search?q=stairway%20to%20heaven")
+def getJSON(url):
+  jsonurl = urlopen(url)
+  txt = json.loads(jsonurl.read())
+  return txt
