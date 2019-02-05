@@ -7,7 +7,7 @@ import sys
 #TODO: try a bunch of diffrent browesers and promt the user the preffered browser. and os
 #TODO: add a gui with tkinter
 
-CHROME = os.path.join('C:\\', 'Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe')#for windows
+CHROME = os.path.join('C:\\', 'Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe')
 token = generate_token()
 spotify = spotipy.Spotify(auth=token)
 
@@ -27,14 +27,15 @@ def checkPStatus(process): #if returns None thennnnn its running <3
         poll = process.poll()
 
 def generate_token():
+    """ Generate the token. Please respect these credentials :) """
     credentials = oauth2.SpotifyClientCredentials(
-        client_id="YOUR_CLIENTID",
-        client_secret="YOUR_CLIENTSECRET")
+        client_id="YOUR CLIENT ID",
+        client_secret="YOURCLIENT SECRET")
     token = credentials.get_access_token()
     return token
 
 def getSpotifySongs(username, playlist_id):
-    a=[]
+    rawData=[]
     token = generate_token()
     results = spotify.user_playlist(username, playlist_id, fields='tracks,next,name')
     print('Writing {0} tracks'.format(results['tracks']['total']))
@@ -47,7 +48,7 @@ def getSpotifySongs(username, playlist_id):
                     track = item
                 try:
                     track_name = track['name']+" by: "+track['artists'][0]['name']
-                    a.append(track_name)
+                    rawData.append(track_name)
                 except KeyError:
                     print("Skipping track {0} by {1} (local only?)".format(
                             track['name'], track['artists'][0]['name']))
@@ -57,11 +58,14 @@ def getSpotifySongs(username, playlist_id):
                 tracks = spotify.next(tracks)
             else:
                 break
-    return a
+    return rawData
 
 
-getSpotifySongs(sys.argv[1], sys.argv[2])#userid, playlist id this is for testing <3
-
+toFormatDataA = getSpotifySongs(sys.argv[1], sys.argv[2])
+formattedURL = []
+for data in toFormatDataA:
+  formattedURL.append(parseTerms(data))
 #run this once everthing has ran its course
-for x in range(0,len(testA)):
-    checkPStatus(openTab(testA[x]))
+for x in range(0,len(formattedURL)):
+    checkPStatus(openTab(formattedURL[x]))
+
