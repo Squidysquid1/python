@@ -25,8 +25,8 @@ def checkPStatus(process): #if returns None thennnnn its running <3
 def generate_token():
     """ Generate the token. Please respect these credentials :) """
     credentials = oauth2.SpotifyClientCredentials(
-        client_id="f23fc3c1b58348959972f6f2ef60f999",
-        client_secret="513c0a4cde1846fa87b60f7156f3f96f")
+        client_id="CLIENTID",
+        client_secret="CLIENTSECRET")
     token = credentials.get_access_token()
     return token
 
