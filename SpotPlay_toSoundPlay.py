@@ -7,13 +7,9 @@ import sys
 #TODO: try a bunch of diffrent browesers and promt the user the preffered browser. and os
 #TODO: add a gui with tkinter
 
-CHROME = os.path.join('C:\\', 'Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe')
-token = generate_token()
-spotify = spotipy.Spotify(auth=token)
-
 def parseTerms(termsA):
   baseUrl="soundcloud.com/search?q=" #spaces should be replaced by"%20"
-  parsedURL = baseURL + re.sub(' ','%20',termsA)#replacing spaces with 20%
+  parsedURL = baseUrl + re.sub(' ','%20',termsA)#replacing spaces with 20%
   return parsedURL
 
 def openTab(url):
@@ -29,8 +25,8 @@ def checkPStatus(process): #if returns None thennnnn its running <3
 def generate_token():
     """ Generate the token. Please respect these credentials :) """
     credentials = oauth2.SpotifyClientCredentials(
-        client_id="YOUR CLIENT ID",
-        client_secret="YOURCLIENT SECRET")
+        client_id="f23fc3c1b58348959972f6f2ef60f999",
+        client_secret="513c0a4cde1846fa87b60f7156f3f96f")
     token = credentials.get_access_token()
     return token
 
@@ -60,11 +56,15 @@ def getSpotifySongs(username, playlist_id):
                 break
     return rawData
 
+CHROME = os.path.join('C:\\', 'Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe')
+token = generate_token()
+spotify = spotipy.Spotify(auth=token)
 
 toFormatDataA = getSpotifySongs(sys.argv[1], sys.argv[2])
 formattedURL = []
 for data in toFormatDataA:
   formattedURL.append(parseTerms(data))
+  
 #run this once everthing has ran its course
 for x in range(0,len(formattedURL)):
     checkPStatus(openTab(formattedURL[x]))
