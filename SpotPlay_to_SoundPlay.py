@@ -8,8 +8,8 @@ import sys
 #TODO: add a gui with tkinter
 
 def parseTerms(termsA):
-  baseUrl="soundcloud.com/search?q=" #spaces should be replaced by"%20"
-  parsedURL = baseUrl + re.sub(' ','%20',termsA)#replacing spaces with 20%
+  baseUrl="soundcloud.com/search?q="
+  parsedURL = baseUrl + re.sub(' ','%20',termsA)#replacing spaces with 20%|| add in "illegal" chars
   return parsedURL
 
 def openTab(url):
@@ -25,7 +25,7 @@ def checkPStatus(process): #if returns None thennnnn its running <3
 def generate_token():
     """ Generate the token. Please respect these credentials :) """
     credentials = oauth2.SpotifyClientCredentials(
-        client_id="CLIENTID",
+        client_id="CLIENTID",#make these system variables
         client_secret="CLIENTSECRET")
     token = credentials.get_access_token()
     return token
